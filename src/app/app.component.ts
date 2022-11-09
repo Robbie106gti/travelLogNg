@@ -11,4 +11,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'travelLogNg';
+
+  // https://material.angular.io/components/
 }
