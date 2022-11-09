@@ -22,22 +22,20 @@
 
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <mat-list role="list">
-      <mat-list-item role="listitem"><button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
+    <div class="example-sidenav">
+        <button mat-raised-button color="accent">
+          <mat-icon>dialpad</mat-icon>
         <span>Redial</span>
       </button>
-      <mat-list-item role="listitem">
-        <button mat-menu-item disabled>
+        <button mat-raised-button color="accent" disabled>
           <mat-icon>voicemail</mat-icon>
           <span>Check voice mail</span>
-        </button></mat-list-item>
-      <mat-list-item role="listitem">
-        <button mat-menu-item>
+        </button>
+        <button mat-raised-button color="accent">
           <mat-icon>notifications_off</mat-icon>
           <span>Disable alerts</span>
-        </button></mat-list-item></mat-list-item>
-    </mat-list>
+        </button>
+  </div>
   </mat-drawer>
   <ng-content select="[primary]"></ng-content>
 </mat-drawer-container>

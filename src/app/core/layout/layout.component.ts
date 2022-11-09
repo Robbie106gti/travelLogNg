@@ -28,7 +28,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     const config: any = {
       horizontalPosition: snack.hor,
       verticalPosition: snack.ver,
-      duration: snack.duration ? snack.duration * 1000 : 5000
+      duration: snack.duration
     };
     this._snackBar.open(snack.msg, snack.btn, config);
   }

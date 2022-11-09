@@ -24,11 +24,11 @@ export class SnackbarService {
   setSnack(snack: Snack) {
     const newSnack: Snack = {
       msg: snack.msg,
-      btn: snack?.btn ?? 'Remove',
-      hor: snack?.hor ?? 'start',
-      ver: snack?.ver ?? 'bottom',
-      duration: snack.duration
+      btn: snack.btn ?? 'Close',
+      hor: snack.hor ?? 'end',
+      ver: snack.ver ?? 'top',
+      duration: snack.duration ?? 5000
     };
-    this.snacks.next(snack);
+    this.snacks.next(newSnack);
   }
 }

@@ -28,6 +28,7 @@ export class LoadingService {
     if (!mode) {
       this.snackbarService.setSnack({
         msg: 'Loading has finished!!!',
+        btn: 'Close'
       });
     }
   }

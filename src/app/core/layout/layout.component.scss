@@ -18,6 +18,9 @@
 
 .example-sidenav {
   padding: 20px;
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0.5rem;
 }
 
 .padding {
