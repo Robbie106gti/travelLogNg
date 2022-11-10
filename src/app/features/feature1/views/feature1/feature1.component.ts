@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { SnackbarService } from '@core/data/snackbar.service';
 import { Unsubscriber } from '@shared/unsubscriber/unsubscriber';
 import { takeUntil } from 'rxjs';
@@ -6,7 +6,8 @@ import { takeUntil } from 'rxjs';
 @Component({
   selector: 'app-feature1',
   templateUrl: './feature1.component.html',
-  styleUrls: ['./feature1.component.scss']
+  styleUrls: ['./feature1.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Feature1Component extends Unsubscriber implements OnInit {
 

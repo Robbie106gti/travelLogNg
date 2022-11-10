@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { takeUntil } from 'rxjs';
 import { Unsubscriber } from '@shared/unsubscriber/unsubscriber';
@@ -8,7 +8,8 @@ import { Snack, SnackbarService } from '../data/snackbar.service';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent extends Unsubscriber implements OnInit  {
 

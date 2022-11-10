@@ -3,20 +3,25 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material.module';
 import { Unsubscriber } from './unsubscriber/unsubscriber';
 import { View404Component } from './view404/view404.component';
+import { DropdownSeachableComponent } from './dropdown-seachable/dropdown-seachable.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     Unsubscriber,
-    View404Component
+    View404Component,
+    DropdownSeachableComponent
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   exports: [
-    MaterialModule
+    MaterialModule,
+    DropdownSeachableComponent
   ]
 })
 export class SharedModule { }

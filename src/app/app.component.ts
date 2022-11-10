@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,8 @@ import { Component } from '@angular/core';
       <ng-container primary>
         <router-outlet></router-outlet>
       </ng-container>
-    </app-layout>`
+    </app-layout>`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
   title = 'travelLogNg';

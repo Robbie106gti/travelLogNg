@@ -15,7 +15,7 @@ export type Snack = {
   providedIn: 'root'
 })
 export class SnackbarService {
-  private disabled$ = new BehaviorSubject(false);
+  private disabled$ = new BehaviorSubject(true);
   private snacks = new BehaviorSubject<Snack | null>(null);
   public snack$ = () => this.snacks.pipe(
     combineLatestWith(this.disabled$),

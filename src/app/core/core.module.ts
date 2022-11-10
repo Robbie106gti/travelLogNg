@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PageComponent } from './page/page.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   exports: [
     LayoutComponent
