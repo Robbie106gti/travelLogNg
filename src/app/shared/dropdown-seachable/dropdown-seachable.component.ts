@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormGroup, ControlContainer, FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Unsubscriber } from '@shared/unsubscriber/unsubscriber';
+import { BehaviorSubject, takeUntil } from 'rxjs';
 import { Cities } from './dropdown-searchable';
 
 @Component({
@@ -17,22 +18,20 @@ import { Cities } from './dropdown-searchable';
   ]
 })
 export class DropdownSeachableComponent extends Unsubscriber implements OnInit, AfterViewInit, ControlValueAccessor   {
-  formControl: FormControl;
+  formControl: FormControl = new FormControl('');
 
   @Input() type?: boolean = false;
-  searchValue= '';
+  searchValue = '';
   cities = Cities;
+  cities$ = new BehaviorSubject(Cities);
 
   onChange = (_: any) => {};
 
   onTouched = () => {};
 
-  constructor(
-    private controlContainer: ControlContainer
-  ) { 
+  constructor() { 
     super();
-    this.formControl = new FormControl('');
-    this.formControl.valueChanges.pipe().subscribe(value => this.type === false ? this.onChange(value[0]) : this.onChange(value)
+    this.formControl.valueChanges.pipe(takeUntil(this._destroyed$)).subscribe(value => this.type === false ? this.onChange(value[0]) : this.onChange(value)
     );
   }
 
@@ -53,6 +52,11 @@ export class DropdownSeachableComponent extends Unsubscriber implements OnInit, 
     this.onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
+  }
+
+  updateOptions(value: string): void {
+    const searchResults = Cities.filter(v => v.toLowerCase().includes(value.toLocaleLowerCase()));
+    this.cities$.next(searchResults);
   }
 
 }
