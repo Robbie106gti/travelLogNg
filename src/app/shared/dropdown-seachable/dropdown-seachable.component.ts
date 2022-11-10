@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
 import { FormGroup, ControlContainer, FormControl, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Unsubscriber } from '@shared/unsubscriber/unsubscriber';
 import { Cities } from './dropdown-searchable';
 
 @Component({
@@ -15,7 +16,7 @@ import { Cities } from './dropdown-searchable';
     }
   ]
 })
-export class DropdownSeachableComponent implements OnInit, AfterViewInit, ControlValueAccessor   {
+export class DropdownSeachableComponent extends Unsubscriber implements OnInit, AfterViewInit, ControlValueAccessor   {
   formControl: FormControl;
 
   @Input() type?: boolean = false;
@@ -29,8 +30,9 @@ export class DropdownSeachableComponent implements OnInit, AfterViewInit, Contro
   constructor(
     private controlContainer: ControlContainer
   ) { 
+    super();
     this.formControl = new FormControl('');
-    this.formControl.valueChanges.subscribe(value => this.type === false ? this.onChange(value[0]) : this.onChange(value)
+    this.formControl.valueChanges.pipe().subscribe(value => this.type === false ? this.onChange(value[0]) : this.onChange(value)
     );
   }
 
