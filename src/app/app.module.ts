@@ -8,7 +8,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { LoadingService } from './core/data/loading.service';
 
 @NgModule({
   declarations: [

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
 import { SnackbarService } from './snackbar.service';
 
 export type loading = {
@@ -14,11 +14,19 @@ export enum LoadingModes { determinate = "determinate", indeterminate = "indeter
   providedIn: 'root'
 })
 export class LoadingService {
+  private disabled$ = new BehaviorSubject(false);
   private loading = new BehaviorSubject<loading | null>(null);
-  public loading$ = () => this.loading.asObservable();
 
-  constructor(private snackbarService: SnackbarService) { 
-    this.loading.subscribe(console.log)
+  public loading$ = () => this.loading.pipe(
+    combineLatestWith(this.disabled$),
+    map(([loading, disabled]) => {
+      if (disabled) return null;
+      return loading;
+    })
+  );
+
+  constructor(private snackbarService: SnackbarService) {
+    // this.loading.subscribe(console.log)
   }
 
   setLoading(mode?: LoadingModes) {
@@ -31,5 +39,15 @@ export class LoadingService {
         btn: 'Close'
       });
     }
+  }
+
+  toggleDisabled(): void {
+    if (!this.disabled$.getValue()) {
+      this.snackbarService.setSnack({
+        msg: 'Loading bar disabled!',
+        btn: 'Close'
+      });
+    }
+    this.disabled$.next(!this.disabled$.getValue());
   }
 }

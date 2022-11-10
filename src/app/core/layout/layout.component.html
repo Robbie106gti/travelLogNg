@@ -1,45 +1,68 @@
-
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"  (click)="drawer.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="refresh()">
-    <mat-icon>refresh</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>share</mat-icon>
-  </button>
+  <mat-toolbar-row>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+      (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"
+      (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>share</mat-icon>
+    </button>
+  </mat-toolbar-row>
+  <div>
+    <ng-container *ngIf="(loadingService.loading$() | async) as loading; else padding">
+      <mat-progress-bar [mode]="loading.mode"></mat-progress-bar>
+    </ng-container>
+  </div>
 </mat-toolbar>
-
-<ng-container *ngIf="(loadingService.loading$() | async) as loading; else padding">
-  <mat-progress-bar [mode]="loading.mode"></mat-progress-bar>
-</ng-container>
 
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <div class="example-sidenav">
-        <button mat-raised-button color="accent">
-          <mat-icon>dialpad</mat-icon>
+      <button mat-raised-button color="accent" (click)="refresh()">
+        <mat-icon>dialpad</mat-icon>
         <span>Redial</span>
       </button>
-        <button mat-raised-button color="accent" disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voice mail</span>
-        </button>
-        <button mat-raised-button color="accent">
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
-        </button>
-  </div>
+      <button mat-raised-button color="accent" disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-raised-button color="accent" (click)="disableNotificationsToggle()">
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+      <mat-list>
+        <mat-list-item>
+          <a [routerLink]="[{outlets: {primary:  []}}]" routerLinkActive>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon> Home
+          </a>
+        </mat-list-item>
+        <mat-list-item color="accent">
+          <a [routerLink]="[{outlets: {primary: ['feature1']}}]" [queryParams]="{name: 'My feature1 name'}"
+            queryParamsHandling="merge" routerLinkActive>
+            <mat-icon aria-hidden="false" aria-label="Example favorite icon" fontIcon="favorite"></mat-icon> Feature 1
+          </a>
+        </mat-list-item>
+        <mat-list-item>
+          <a [routerLink]="[{outlets: {primary:  ['feature2']}}]" [queryParams]="{name: 'My feature2 name'}"
+            queryParamsHandling="merge" routerLinkActive>
+            <mat-icon aria-hidden="false" aria-label="Example star icon" fontIcon="star"></mat-icon>Feature 2
+          </a>
+        </mat-list-item>
+      </mat-list>
+    </div>
   </mat-drawer>
   <ng-content select="[primary]"></ng-content>
 </mat-drawer-container>
 
 <ng-template #padding>
-  <div class="padding"></div>
+  <div class="padding secondairy-color"></div>
 </ng-template>

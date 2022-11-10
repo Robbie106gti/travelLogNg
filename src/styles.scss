@@ -1,4 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --primary-color: #7b1fa2;
+  --accent-color: #69f0ae;
+  --warn--color: #f44336;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+a {
+  color: var(--accent-color);
+  display: flex; 
+  align-items: center;
+  gap: 0.5rem;
+}
+a:hover {
+  color:  #31e9e3;
+}
+a:visited {
+  color: #69f074;
+}

@@ -4,6 +4,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from '../shared/shared.module';
 import { PageComponent } from './page/page.component';
 import { HomeComponent } from './home/home.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,6 +16,7 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     SharedModule
   ],
   exports: [
